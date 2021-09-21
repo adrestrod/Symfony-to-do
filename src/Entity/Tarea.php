@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @AppAssert\TareaUnica
  * @ORM\Entity(repositoryClass=TareaRepository::class) 
+ * @ORM\HasLifecycleCallbacks()
  */
 class Tarea
 {
@@ -31,31 +32,57 @@ class Tarea
      */
     private $finalizada;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creadoEn;
+
     public function getId(): ?int
     {
-        return $this->id;
+        return $this -> id;
+    }
+
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setValorCreadoEn()
+    {
+        $this -> creadoEn = new \DateTime();
     }
 
     public function getDescripcion(): ?string
     {
-        return $this->descripcion;
+        return $this -> descripcion;
     }
 
     public function setDescripcion(string $descripcion): self
     {
-        $this->descripcion = $descripcion;
+        $this -> descripcion = $descripcion;
 
         return $this;
     }
 
     public function getFinalizada(): ?bool
     {
-        return $this->finalizada;
+        return $this -> finalizada;
     }
 
     public function setFinalizada(bool $finalizada): self
     {
-        $this->finalizada = $finalizada;
+        $this -> finalizada = $finalizada;
+
+        return $this;
+    }
+
+    public function getCreadoEn(): ?\DateTimeInterface
+    {
+        return $this -> creadoEn;
+    }
+
+    public function setCreadoEn(\DateTimeInterface $creadoEn): self
+    {
+        $this -> creadoEn = $creadoEn;
 
         return $this;
     }
