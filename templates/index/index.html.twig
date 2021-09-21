@@ -27,7 +27,7 @@
                     {% endif %}
                     </td>
                     <td>
-                        {{ tarea.creadoEn|date("d-m-Y") }}
+                        {{ tarea.creadoEn|tiempo }}
                     </td>
                     <td>
                     <a href="{{ path('tarea_show', {'id': tarea.id}) }}" class="btn btn-link mg-3">Detalle</a>
