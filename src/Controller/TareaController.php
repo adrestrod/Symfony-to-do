@@ -79,7 +79,7 @@ class TareaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tarea_delete", methods={"POST"})
+     * @Route("/{id}", name="tarea_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Tarea $tarea): Response
     {
@@ -90,5 +90,22 @@ class TareaController extends AbstractController
         }
 
         return $this->redirectToRoute('tarea_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}", name="tarea_finalizar", methods={"POST"})
+     */
+    public function finalizar(Tarea $tarea, Request $request ): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            $em = $this->getDoctrine()->getManager();
+            $tarea->setFinalizada(!$tarea->getFinalizada());
+            $em->flush();
+            return $this->json([
+                'finalizada' => $tarea->getFinalizada()
+            ]);
+        }
+
+        throw $this->createNotFoundException();
     }
 }

@@ -26,6 +26,11 @@ class Tarea
      */
     private $descripcion;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $finalizada;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -39,6 +44,18 @@ class Tarea
     public function setDescripcion(string $descripcion): self
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getFinalizada(): ?bool
+    {
+        return $this->finalizada;
+    }
+
+    public function setFinalizada(bool $finalizada): self
+    {
+        $this->finalizada = $finalizada;
 
         return $this;
     }
