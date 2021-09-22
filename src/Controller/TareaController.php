@@ -9,9 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
- * @Route("/")
+ * @Route("/tarea")
  */
 class TareaController extends AbstractController
 {
@@ -20,6 +21,8 @@ class TareaController extends AbstractController
      */
     public function index(TareaRepository $tareaRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->render('tarea/index.html.twig', [
             'tareas' => $tareaRepository->findAll(),
         ]);
@@ -28,7 +31,7 @@ class TareaController extends AbstractController
     /**
      * @Route("/new", name="tarea_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Security $security, Request $request): Response
     {
         $tarea = new Tarea();
         $form = $this->createForm(TareaType::class, $tarea);
@@ -36,6 +39,7 @@ class TareaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $tarea->setUsuario($security->getUser());
             $entityManager->persist($tarea);
             $entityManager->flush();
 
@@ -53,6 +57,8 @@ class TareaController extends AbstractController
      */
     public function show(Tarea $tarea): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('tarea/show.html.twig', [
             'tarea' => $tarea,
         ]);
@@ -63,6 +69,8 @@ class TareaController extends AbstractController
      */
     public function edit(Request $request, Tarea $tarea): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $form = $this->createForm(TareaType::class, $tarea);
         $form->handleRequest($request);
 
