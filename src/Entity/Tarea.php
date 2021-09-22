@@ -37,6 +37,12 @@ class Tarea
      */
     private $creadoEn;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tareas")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $usuario;
+
     public function getId(): ?int
     {
         return $this -> id;
@@ -83,6 +89,18 @@ class Tarea
     public function setCreadoEn(\DateTimeInterface $creadoEn): self
     {
         $this -> creadoEn = $creadoEn;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?User
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?User $usuario): self
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }
