@@ -19,8 +19,8 @@
                 <td>{{ tarea.id }}</td>
                 <td>{{ tarea.descripcion }}</td>
                 <td>
-                    <a href="{{ path('tarea_show', {'id': tarea.id}) }}">Detalle</a>
-                    <a href="{{ path('tarea_edit', {'id': tarea.id}) }}">Editar</a>
+                    <a href="{{ path('tarea_show', {'id': tarea.id}) }}" class="btn btn-primary mg-3">Detalle</a>
+                    <a href="{{ path('tarea_edit', {'id': tarea.id}) }}" class="btn btn-primary mg-3">Editar</a>
                 </td>
             </tr>
         {% else %}

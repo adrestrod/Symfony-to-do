@@ -26,9 +26,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">Volver</a>
+    <a href="{{ path('user_index') }}" class="btn btn-primary mg-3">Volver</a>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">Editar</a>
+    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-warning mg-3">Editar</a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

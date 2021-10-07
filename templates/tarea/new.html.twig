@@ -3,9 +3,9 @@
 {% block title %}Nueva tarea{% endblock %}
 
 {% block body %}
-    <h1>Crear nuevo tarea</h1>
+    <h1>Crear nueva tarea</h1>
 
     {{ include('tarea/_form.html.twig') }}
 
-    <a href="{{ path('tarea_index') }}">Volver</a>
+    <a href="{{ path('index') }}" class="btn btn-primary mg-3">Volver</a>
 {% endblock %}
